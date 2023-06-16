@@ -8,7 +8,9 @@
 
 #include <iostream>
 #include <cstring>
-class _string
+#include "../../Blocks/Block.h"
+
+class _string: public IWritable
 {
     char* _data;
     size_t size;
@@ -31,6 +33,13 @@ public:
     _string& operator=(_string&& other) noexcept;
     char& operator[](size_t index);
     char operator[](size_t index) const;
+    bool operator==(const _string& other);
+
+    void writeInFile(std::ofstream &file) const override;
+    void readFromFile(std::ifstream &file) override;
+
+    friend std::istream& operator>>(std::istream& is, _string& str);
+
     ~_string();
 
 };

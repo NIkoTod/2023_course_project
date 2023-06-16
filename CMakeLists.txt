@@ -5,15 +5,18 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(2023_Course_Project
         main.cpp
-        Root/Blocks/Block.h
-        Root/String/_string.cpp
-        Root/String/_string.h
+        Root/Utility/String/_string.cpp
         Root/Blocks/Topic/Topic.cpp
-        Root/Blocks/Topic/Topic.h
         Root/Blocks/Post/Post.cpp
-        Root/Blocks/Post/Post.h
         Root/Blocks/Comment/Comment.cpp
-        Root/Blocks/Comment/Comment.h
+        Root/Utility/Collection/Collection.hpp
+        Root/Repository/Repository.cpp
+        Root/User/User.cpp Root/User/User.h
+        Root/Utility/Set/_set.hpp
+        Root/Command/Command.h
+        Root/Command/UserCommand/CreateUserCommand.h
         Root/Interfaces/IOpenable.h
-        Root/Collection/Collection.hpp
-        Root/System/System.cpp Root/System/System.h)
+        Root/Interfaces/IWriteble.h
+        Root/Factory/Factory.h
+        Root/Factory/UserFactory.h
+        )

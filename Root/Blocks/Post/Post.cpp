@@ -12,7 +12,7 @@ void Post::print() const {
     std::cout<<header.c_str()<<" {id:"<<id<<"}";
 }
 
-Post::Post() :header(),content(){}
+
 
 void Post::addComment(const Comment &comment) {
     comments.add(comment);
@@ -53,6 +53,6 @@ Post::Post(Post &&other):header(),content() {
     moveFrom(std::move(other));
 }
 
-Collection<Comment> &Post::getComments() {
+const Collection<Comment> &Post::getComments() const{
     return comments;
 }

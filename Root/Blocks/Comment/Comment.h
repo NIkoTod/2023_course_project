@@ -7,8 +7,11 @@
 
 
 #include "../Block.h"
-#include "../../String/_string.h"
-#include "../../Collection/Collection.hpp"
+#include "../../Utility/String/_string.h"
+#include "../../Utility/Collection/Collection.hpp"
+#include "../../User/User.h"
+#include "../../Utility/Set/_set.hpp"
+
 
 class Comment : public Block{
     _string author;
@@ -16,21 +19,27 @@ class Comment : public Block{
 
     Collection<Comment> list;
 
+    set<User> upVotes;
+    set<User> downVotes;
+
     unsigned id;
 
 public:
 
-    Comment();
+    Comment() = default;
     Comment(const _string& author, const _string& text);
 
     void writeInFile(std::ofstream &file) const override;
     void readFromFile(std::ifstream &file) override;
+
     void print() const override;
+
     void addFeedBack(const Comment& feedBack);
-    Comment *clone() const override;
+    void addUpVote(const User& user);
+    void addDownVote(const User& user);
+
+    Comment* clone() const override;
     ~Comment() override = default;
-
-
 
 };
 

@@ -20,11 +20,17 @@ Comment *Comment::clone() const {
     return new Comment(*this);
 }
 
-Comment::Comment() :author(),text(){}
-
 Comment::Comment(const _string &author, const _string &text)
 :author(author),text(text){}
 
 void Comment::addFeedBack(const Comment &feedBack) {
     list.add(feedBack);
+}
+
+void Comment::addUpVote(const User& user) {
+    upVotes.insert(user);
+}
+
+void Comment::addDownVote(const User& user) {
+    downVotes.insert(user);
 }

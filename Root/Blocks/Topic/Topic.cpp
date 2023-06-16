@@ -4,10 +4,6 @@
 
 #include "Topic.h"
 
-Topic::Topic()
-:header(),authorName(),description()
-{
-}
 
 void Topic::writeInFile(std::ofstream &file) const {
 
@@ -59,6 +55,6 @@ Block * Topic::clone() const {
     return new Topic(*this);
 }
 
-Collection<Post>& Topic::getPosts() {
+const Collection<Post>& Topic::getPosts() const {
     return postCollection;
 }

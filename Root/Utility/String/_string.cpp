@@ -1,8 +1,7 @@
 #include "_string.h"
 _string operator+(const _string& lhs, const _string& rhs)
 {
-    _string result;  //TBI ??
-
+    _string result;
     return result;
 }
 
@@ -53,6 +52,7 @@ void _string::free()
 {
     delete[] _data;
     _data = nullptr;
+    size = 0;
 }
 _string::~_string()
 {
@@ -71,7 +71,7 @@ void _string::copyFrom(const _string& other)
     strcpy(_data, other._data);
 }
 
-char& _string::operator[](size_t index) //Неконстантен достъп
+char& _string::operator[](size_t index)
 {
     return _data[index];
 }
@@ -90,6 +90,7 @@ void _string::moveFrom(_string && other) {
     delete[] _data;
     _data = other._data;
     other._data = nullptr;
+    size = other.size;
     other.size = 0;
 
 }
@@ -97,7 +98,31 @@ void _string::moveFrom(_string && other) {
 _string &_string::operator=(_string &&other) noexcept{
     if (this != &other)
     {
+        free();
         moveFrom(std::move(other));
     }
     return *this;
+}
+
+bool _string::operator==(const _string &other) {
+    return strcmp(_data,other._data) == 0;
+}
+
+void _string::writeInFile(std::ofstream &file) const {
+    file.write((const char*)&size, sizeof size);
+    file.write(_data,size);
+}
+
+void _string::readFromFile(std::ifstream &file) {
+    file.read((char*) &size,sizeof size);
+    _data = new char[size+1];
+    file.read(_data,size);
+    _data[size] = 0;
+}
+
+std::istream &operator>>(std::istream &is,  _string &str) {
+    char buff[128];
+    is.getline(buff,128);
+    str = buff;
+    return is;
 }

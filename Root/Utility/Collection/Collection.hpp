@@ -8,7 +8,7 @@
 #include <iostream>
 
 template<class T>
-class Collection{
+class Collection : IWritable{
 
     T** list;
     size_t capacity;
@@ -27,10 +27,19 @@ public:
     Collection(Collection<T>&& other) noexcept;
     ~Collection();
 
+
+public:
+
+    void writeInFile(std::ofstream &file) const override;
+    void readFromFile(std::ifstream &file) override ;
+
     void add(const T& el);
-    //void removeAt();
+    void add(T&& el);
     void print() const;
     bool isEmpty() const;
+
+    size_t getSize() const;
+
     T& operator[](unsigned x);
     T& operator[](unsigned x) const;
 
@@ -38,6 +47,39 @@ public:
     Collection<T>& operator=(Collection &&other) noexcept;
 
 };
+
+template<class T>
+void Collection<T>::add(T &&el) {
+
+    if(size == capacity){
+        resize(capacity*2);
+    }
+    *list[size++] = std::move(el);
+
+}
+
+template<class T>
+void Collection<T>::readFromFile(std::ifstream &file) {
+    file.read((char *) &size,sizeof size);
+    file.read((char *) &capacity,sizeof capacity);
+    for(int i = 0 ; i < size;i++){
+        list[i]->readFromFile(file);
+    }
+}
+
+template<class T>
+void Collection<T>::writeInFile(std::ofstream &file) const {
+    file.write((const char *) &size,sizeof size);
+    file.write((const char *) &capacity,sizeof capacity);
+    for(int i = 0 ; i < size;i++){
+        list[i]->writeInFile(file);
+    }
+}
+
+template<class T>
+size_t Collection<T>::getSize() const {
+    return size;
+}
 
 template<class T>
 bool Collection<T>::isEmpty() const{

@@ -3,7 +3,7 @@
 
 #include "../Block.h"
 #include "../Comment/Comment.h"
-#include "../../Collection/Collection.hpp"
+
 
 class Post : public Block{
 
@@ -18,7 +18,7 @@ class Post : public Block{
 
 public:
 
-    Post();
+    Post() = default;
     Post(const _string& header,const _string& content);
     Post(const Post& other);
     Post(Post&& other);
@@ -29,7 +29,7 @@ public:
     void print() const override;
     Block *clone() const override;
     void addComment(const Comment& comment);
-    Collection<Comment>& getComments();
+    const Collection<Comment>& getComments() const;
 
     ~Post() override = default;
 

@@ -6,12 +6,10 @@
 #define BLOCK_H
 
 #include "fstream"
+#include "../Interfaces/IWriteble.h"
 
-class Block{
+class Block : public IWritable{
 public:
-
-    virtual void writeInFile(std::ofstream& file) const =0;
-    virtual void readFromFile(std::ifstream& file) = 0;
 
     virtual void print() const = 0;
     virtual Block* clone() const = 0;

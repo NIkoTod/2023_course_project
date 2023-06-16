@@ -4,9 +4,6 @@
 
 #include "../Block.h"
 #include "../Post/Post.h"
-#include "../../String/_string.h"
-#include "../../Collection/Collection.hpp"
-
 
 class Topic : public Block{
 
@@ -22,13 +19,13 @@ class Topic : public Block{
 
 public:
 
-    Topic();
+    Topic()  = default;
     Topic(const _string& header,const _string& authorName,const _string& description);
     Topic(const Topic& other);
     ~Topic() = default;
 
     void addPost(const Post & post);
-    Collection<Post>& getPosts();
+    const Collection<Post>& getPosts() const;
     void writeInFile(std::ofstream &file) const override;
     void readFromFile(std::ifstream &file) override;
     void print() const override;
