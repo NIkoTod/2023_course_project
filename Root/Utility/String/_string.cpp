@@ -104,7 +104,7 @@ _string &_string::operator=(_string &&other) noexcept{
     return *this;
 }
 
-bool _string::operator==(const _string &other) {
+bool _string::operator==(const _string &other) const{
     return strcmp(_data,other._data) == 0;
 }
 
@@ -125,4 +125,8 @@ std::istream &operator>>(std::istream &is,  _string &str) {
     is.getline(buff,128);
     str = buff;
     return is;
+}
+
+bool _string::operator!=(const _string &other) const{
+    return !(*this == other);
 }

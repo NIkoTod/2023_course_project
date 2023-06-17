@@ -27,7 +27,6 @@ public:
     Collection(Collection<T>&& other) noexcept;
     ~Collection();
 
-
 public:
 
     void writeInFile(std::ofstream &file) const override;
@@ -38,6 +37,7 @@ public:
     void print() const;
     bool isEmpty() const;
 
+    bool contains(const T& el);
     size_t getSize() const;
 
     T& operator[](unsigned x);
@@ -47,6 +47,15 @@ public:
     Collection<T>& operator=(Collection &&other) noexcept;
 
 };
+
+template<class T>
+bool Collection<T>::contains(const T& el) {
+
+    for(int i = 0 ; i < size;i++){
+        if(el == *list[i])return true;
+    }
+    return false;
+}
 
 template<class T>
 void Collection<T>::add(T &&el) {
@@ -60,17 +69,24 @@ void Collection<T>::add(T &&el) {
 
 template<class T>
 void Collection<T>::readFromFile(std::ifstream &file) {
-    file.read((char *) &size,sizeof size);
+
     file.read((char *) &capacity,sizeof capacity);
+    list = new T*[capacity];
+
+    file.read((char *) &size,sizeof size);
+
     for(int i = 0 ; i < size;i++){
-        list[i]->readFromFile(file);
+        T *el = new T();
+        el->readFromFile(file);
+        list[i] = el;
     }
 }
 
 template<class T>
 void Collection<T>::writeInFile(std::ofstream &file) const {
-    file.write((const char *) &size,sizeof size);
+
     file.write((const char *) &capacity,sizeof capacity);
+    file.write((const char *) &size,sizeof size);
     for(int i = 0 ; i < size;i++){
         list[i]->writeInFile(file);
     }
@@ -155,14 +171,16 @@ template<class T>
 T &Collection<T>::operator[](unsigned int x) {
     if(x > size)
         throw std::out_of_range("index is out of bounds");
-    return list[x];
+    return *list[x];
 }
 
 template<class T>
 void Collection<T>::print() const {
-    if(isEmpty())throw std::logic_error("collection is empty");
+    if(isEmpty())
+        throw std::logic_error("collection is empty");
     for(int i = 0 ; i < size; i++){
         list[i]->print();
+        std::cout<<std::endl;
     }
 
 }

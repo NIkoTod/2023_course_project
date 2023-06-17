@@ -6,7 +6,7 @@
 #define BLOCK_H
 
 #include "fstream"
-#include "../Interfaces/IWriteble.h"
+#include "../Interfaces/IWriteble.hpp"
 
 class Block : public IWritable{
 public:

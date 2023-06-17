@@ -14,7 +14,8 @@ class Repository {
 
     Repository() = default;
 
-    static Repository* singleton_;
+    static Repository* repository;
+
     bool readUsers(std::ifstream& file);
     bool writeUsers(std::ofstream& file) const;
     bool readTopics(std::ifstream& file);
@@ -22,15 +23,27 @@ class Repository {
 
 public:
 
-    Repository(const Repository &other) = delete;
-    void operator=(const Repository &) = delete;
+    Repository(const Repository&) = delete;
+    void operator=(const Repository&) = delete;
+
     static Repository *GetInstance();
 
-    Collection<User>& getUsersWithFullAccess();
-    Collection<Topic>& getTopicsWithFullAccess();
+    const Collection<User>& getUsers() const;
+    const Collection<Topic>& getTopics() const;
+
+    void addUser(const User& user);
+    void addTopic(const Topic& topic);
+
+    Topic& getTopicAt(unsigned id);
+    User& getUserAt(unsigned id);
+
+    unsigned getUserId(const User& user);
+    bool containsUser(const User& user);
 
     bool readData(std::ifstream& file);
     bool saveData(std::ofstream& file) const;
+
+    ~Repository() = default;
 
 };
 

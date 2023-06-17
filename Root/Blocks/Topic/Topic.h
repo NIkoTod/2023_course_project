@@ -25,6 +25,7 @@ public:
     ~Topic() = default;
 
     void addPost(const Post & post);
+
     const Collection<Post>& getPosts() const;
     void writeInFile(std::ofstream &file) const override;
     void readFromFile(std::ifstream &file) override;

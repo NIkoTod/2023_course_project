@@ -33,7 +33,8 @@ public:
     _string& operator=(_string&& other) noexcept;
     char& operator[](size_t index);
     char operator[](size_t index) const;
-    bool operator==(const _string& other);
+    bool operator==(const _string& other) const;
+    bool operator!=(const _string& other)const;
 
     void writeInFile(std::ofstream &file) const override;
     void readFromFile(std::ifstream &file) override;

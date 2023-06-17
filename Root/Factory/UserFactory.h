@@ -13,13 +13,11 @@ class UserFactory: Factory{
 public:
 
     UserFactory() = default;
-    User& create() const override {
-
+    User* create() const override {
         _string name = createString("Input name");
         _string secondName = createString("Input second name");
         _string password = createString("Input password");
-        User & user = * new User(name,secondName,password,++id);
-        return user;
+        return new User(name,secondName,password);
     }
 };
 unsigned UserFactory::id = 0;

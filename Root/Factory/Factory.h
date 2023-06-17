@@ -13,7 +13,7 @@ public:
 
     Factory() = default;
 
-    virtual Block& create() const {}
+    virtual Block* create() const = 0;
 
     static _string createString(const char* message){
         std::cout<<message<<": "<<std::endl;

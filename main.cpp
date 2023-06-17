@@ -1,10 +1,9 @@
 #include <iostream>
 #include <sstream>
-#include "Root/Blocks/Topic/Topic.h"
-#include "Root/Utility/Set/_set.hpp"
-#include "Root/Factory/UserFactory.h"
+#include "Root/Program/Program.h"
 
 int main() {
+
 
 //    Topic topic("TopicTest","Me","NODATA");
 //    Post post("PostTest","TEST");
@@ -22,8 +21,21 @@ int main() {
 //    _string test;
 //    test.readFromFile(f);
 //    test.print();
+//
+//
+//    std::ifstream ifs("testSaveData.dat",std::ios::binary);
+//    Repository::GetInstance()->readData(ifs);
+//    Command::setRepository(Repository::GetInstance());
+//    CreateUserCommand createUserCommand;
+//    createUserCommand.execute();
+//
+//    Repository * repo = Repository::GetInstance();
+//    std::ofstream f("testSaveData.dat",std::ios::binary);
+//    repo->getUserAt(0).addPoints(1);
+//    repo->saveData(f);
+//    Repository::GetInstance()->getUsers().print();
+//    std::cout<<"\n\n\n";
 
-    UserFactory f;
-    f.create();
+    Program::getInstance()->run();
 
 }

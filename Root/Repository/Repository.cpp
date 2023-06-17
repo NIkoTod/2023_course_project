@@ -4,17 +4,19 @@
 
 #include "Repository.h"
 
-
+Repository* Repository::repository = nullptr;
 
 Repository *Repository::GetInstance() {
-    return new Repository();
+    if(repository == nullptr)
+        repository = new Repository();
+    return repository;
 }
 
-Collection<User> &Repository::getUsersWithFullAccess() {
+const Collection<User> &Repository::getUsers() const {
     return users;
 }
 
-Collection<Topic> &Repository::getTopicsWithFullAccess() {
+const Collection<Topic> &Repository::getTopics() const{
     return topics;
 }
 
@@ -46,5 +48,30 @@ bool Repository::writeTopics(std::ofstream &file) const{
 
 }
 
+void Repository::addUser(const User &user) {
+    users.add(user);
+}
 
+void Repository::addTopic(const Topic &topic) {
+    topics.add(topic);
+}
 
+Topic &Repository::getTopicAt(unsigned int id) {
+    return topics[id];
+}
+
+User& Repository::getUserAt(unsigned int id) {
+    return users[id];
+}
+
+bool Repository::containsUser(const User& user) {
+    return users.contains(user);
+}
+
+unsigned Repository::getUserId(const User &user) {
+
+    for(int i = 0; i < users.getSize();i++){
+        if(users[i] == user)return i;
+    }
+
+}

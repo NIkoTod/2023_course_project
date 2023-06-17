@@ -11,12 +11,15 @@ add_executable(2023_Course_Project
         Root/Blocks/Comment/Comment.cpp
         Root/Utility/Collection/Collection.hpp
         Root/Repository/Repository.cpp
-        Root/User/User.cpp Root/User/User.h
+        Root/User/User.cpp
         Root/Utility/Set/_set.hpp
         Root/Command/Command.h
         Root/Command/UserCommand/CreateUserCommand.h
-        Root/Interfaces/IOpenable.h
-        Root/Interfaces/IWriteble.h
+        Root/Interfaces/IWriteble.hpp
         Root/Factory/Factory.h
         Root/Factory/UserFactory.h
-        )
+        Root/Factory/CommandFactory.h
+        Root/Command/UserCommand/LoginUserCommand.h
+        Root/Command/Command.cpp
+        Root/Program/Program.cpp
+        Root/Interfaces/IProgram.h)

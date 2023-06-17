@@ -1,14 +1,27 @@
-//
-// Created by nikol on 16.06.2023.
-//
-
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../System/System.h"
+
+class IProgram;
+#include "../Repository/Repository.h"
+#include "../Interfaces/IProgram.h"
 
 class Command{
+protected:
+
+    static Repository * repository;
+    static IProgram * program;
+
 public:
-    virtual bool execute(const System& system) const =0 ;
+
+    static void setRepository(Repository * repo);
+    static void setProgram(IProgram * prog);
+    virtual bool execute() const = 0;
+
+    virtual ~Command() = default;
+
 };
+
+
+
 #endif //COMMAND_H

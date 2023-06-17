@@ -20,7 +20,7 @@ class User: public Block {
 public:
 
     User() = default;
-    User(const _string &name, const _string &secondName, const _string &password, unsigned int id);
+    User(const _string &name, const _string &secondName, const _string &password, unsigned int id = 0);
     ~User() = default;
 
     void addPoints(int x);
@@ -29,13 +29,15 @@ public:
     const _string& getSecondName() const;
     const _string& getPassword() const;
 
+    void setId(unsigned int id);
+
     void writeInFile(std::ofstream &file) const override;
     void readFromFile(std::ifstream &file) override;
 
     void print() const override;
     User *clone() const override;
 
-    bool operator==(const User& other);
+    bool operator==(const User& other) const;
     friend std::ostream& operator<<(std::ostream& os,const User& user);
 
 };
