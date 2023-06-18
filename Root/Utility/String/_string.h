@@ -9,6 +9,8 @@
 #include <iostream>
 #include <cstring>
 #include "../../Blocks/Block.h"
+#include "../Collection/Collection.hpp"
+#include <sstream>
 
 class _string: public IWritable
 {
@@ -38,6 +40,9 @@ public:
 
     void writeInFile(std::ofstream &file) const override;
     void readFromFile(std::ifstream &file) override;
+
+    bool containsSubString(const _string& str) const;
+    Collection<_string>* split(char delim) const;
 
     friend std::istream& operator>>(std::istream& is, _string& str);
 

@@ -1,7 +1,11 @@
+
 #include "_string.h"
+
+
 _string operator+(const _string& lhs, const _string& rhs)
 {
-    _string result;
+    _string result(lhs);
+    result+=rhs;
     return result;
 }
 
@@ -129,4 +133,34 @@ std::istream &operator>>(std::istream &is,  _string &str) {
 
 bool _string::operator!=(const _string &other) const{
     return !(*this == other);
+}
+
+bool _string::containsSubString(const _string &str) const{
+    Collection<_string> * left = this->split(' ');
+    if(left->contains(str))return true;
+    return false;
+}
+
+Collection<_string> *_string::split(char delim) const{
+
+    std::stringstream ss(_data);
+    int count = 0;
+    for(int i = 0; i < size;i++){
+        if(_data[i] == delim)count++;
+    }
+
+    auto *list = new Collection<_string>();
+
+    if(count == 0){
+        list->add(*this);
+    }
+    else {
+        while (!ss.eof()) {
+            char buff[32];
+            ss.getline(buff, size, delim);
+            _string str(buff);
+            list->add(str);
+        }
+    }
+    return list;
 }

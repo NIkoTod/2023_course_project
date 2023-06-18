@@ -22,5 +22,14 @@ public:
         return str;
     }
 
+    static _string createString(const char* message,int param){
+        std::cout<<message<<": "<<std::endl;
+        _string str;
+        std::cin >> str;
+        return str;
+    }
+
+    virtual ~Factory()  = default;
+
 };
 #endif //FACTORY_H

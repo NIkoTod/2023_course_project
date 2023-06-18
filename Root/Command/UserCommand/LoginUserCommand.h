@@ -9,16 +9,15 @@ public:
 
     bool execute() const override {
 
-        _string name = Factory::createString("First name: ");
-        _string secondName = Factory::createString("Last name: ");
-        _string password = Factory::createString("Password  name: ");
+        _string name = Factory::createString("Input first name");
+        _string secondName = Factory::createString("Input last name");
+        _string password = Factory::createString("Input password");
         User user(name,secondName,password);
 
         if(repository->containsUser(user)){
             program->setCurrentUserId(repository->getUserId(user));
             return true;
         }
-
         else return false;
     }
 };

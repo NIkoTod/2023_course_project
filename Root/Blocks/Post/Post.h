@@ -27,9 +27,14 @@ public:
     void readFromFile(std::ifstream &file) override;
 
     void print() const override;
-    Block *clone() const override;
+    Post *clone() const override;
     void addComment(const Comment& comment);
-    const Collection<Comment>& getComments() const;
+
+    const Collection<Comment> &getComments() const;
+    Comment * getCommentAt(unsigned id);
+    void list() const override;
+
+    void setId(unsigned int id);
 
     ~Post() override = default;
 

@@ -4,7 +4,7 @@
 #include <iostream>
 
 template<typename T>
-class set {
+class set : IWritable{
 
     T* elements;
     size_t size;
@@ -29,9 +29,40 @@ public:
     size_t getSize() const;
     void print() const;
 
+    void writeInFile(std::ofstream &file) const override;
+    void readFromFile(std::ifstream &file) override;
+
+public:
     set<T>& operator=(const set<T>& other);
 
 };
+
+template<typename T>
+void set<T>::writeInFile(std::ofstream &file) const {
+
+    file.write((const char *) &capacity,sizeof capacity);
+    file.write((const char *) &size,sizeof size);
+    for(int i = 0 ; i < size;i++){
+        elements[i].writeInFile(file);
+    }
+
+}
+
+template<typename T>
+void set<T>::readFromFile(std::ifstream &file) {
+
+    file.read((char *) &capacity,sizeof capacity);
+    elements = new T[capacity];
+
+    file.read((char *) &size,sizeof size);
+
+    for(int i = 0 ; i < size;i++){
+        T *el = new T();
+        el->readFromFile(file);
+        elements[i] = *el;
+        delete el;
+    }
+}
 
 template<typename T>
 set<T> &set<T>::operator=(const set<T> &other) {

@@ -169,7 +169,7 @@ T &Collection<T>::operator[](unsigned int x) const {
 
 template<class T>
 T &Collection<T>::operator[](unsigned int x) {
-    if(x > size)
+    if(x >= size)
         throw std::out_of_range("index is out of bounds");
     return *list[x];
 }

@@ -12,12 +12,14 @@
 #include "../../User/User.h"
 #include "../../Utility/Set/_set.hpp"
 
-
+enum class Vote{
+    LIKE,
+    DISLIKE
+};
 class Comment : public Block{
+
     _string author;
     _string text;
-
-    Collection<Comment> list;
 
     set<User> upVotes;
     set<User> downVotes;
@@ -27,16 +29,31 @@ class Comment : public Block{
 public:
 
     Comment() = default;
-    Comment(const _string& author, const _string& text);
 
+    explicit Comment(const _string &text);
+
+    Comment(const _string& author, const _string& text);
     void writeInFile(std::ofstream &file) const override;
     void readFromFile(std::ifstream &file) override;
 
     void print() const override;
 
-    void addFeedBack(const Comment& feedBack);
-    void addUpVote(const User& user);
-    void addDownVote(const User& user);
+
+    void setText(const _string &text);
+
+    const _string &getText() const;
+
+
+    void addVote(const User& user, Vote vote);
+
+
+    const _string &getAuthor() const;
+
+    void setAuthor(const _string &author);
+
+    unsigned int getId() const;
+
+    void setId(unsigned int id);
 
     Comment* clone() const override;
     ~Comment() override = default;

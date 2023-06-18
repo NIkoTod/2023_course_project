@@ -11,13 +11,15 @@ protected:
 
     static Repository * repository;
     static IProgram * program;
+    static Vote vote;
 
 public:
 
     static void setRepository(Repository * repo);
     static void setProgram(IProgram * prog);
-    virtual bool execute() const = 0;
 
+    virtual bool execute() const = 0;
+    Command *provideVoteType(Vote vote);
     virtual ~Command() = default;
 
 };

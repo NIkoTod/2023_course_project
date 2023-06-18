@@ -34,7 +34,9 @@ public:
     void addUser(const User& user);
     void addTopic(const Topic& topic);
 
-    Topic& getTopicAt(unsigned id);
+    void printSpecifiedTopics(const _string& toSearch);
+
+    Topic* getTopicAt(unsigned id);
     User& getUserAt(unsigned id);
 
     unsigned getUserId(const User& user);

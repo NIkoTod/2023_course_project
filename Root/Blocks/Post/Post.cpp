@@ -1,11 +1,17 @@
 #include "Post.h"
 
 void Post::writeInFile(std::ofstream &file) const {
-
+    header.writeInFile(file);
+    content.writeInFile(file);
+    file.write((const char *)&id,sizeof id);
+    comments.writeInFile(file);
 }
 
 void Post::readFromFile(std::ifstream &file) {
-
+    header.readFromFile(file);
+    content.readFromFile(file);
+    file.read(( char *)&id,sizeof id);
+    comments.readFromFile(file);
 }
 
 void Post::print() const {
@@ -23,7 +29,7 @@ Post::Post(const _string &header, const _string &content)
 {
 }
 
-Block *Post::clone() const {
+Post *Post::clone() const {
     return new Post(*this);
 }
 
@@ -33,6 +39,7 @@ void Post::copyFrom(const Post &other) {
     content = other.content;
     id = other.id;
     comments = other.comments;
+
 
 }
 
@@ -53,6 +60,24 @@ Post::Post(Post &&other):header(),content() {
     moveFrom(std::move(other));
 }
 
-const Collection<Comment> &Post::getComments() const{
+void Post::setId(unsigned int id) {
+    Post::id = id;
+}
+
+void Post::list() const {
+    try{
+        comments.print();
+    }catch (const std::logic_error& e){
+        std::cout<<"-- No posts here --";
+    }catch (...){
+        std::cout<<"!! something went wrong !!";
+    }
+}
+
+const Collection<Comment> &Post::getComments() const {
     return comments;
+}
+
+Comment *Post::getCommentAt(unsigned int id) {
+    return &comments[id];
 }

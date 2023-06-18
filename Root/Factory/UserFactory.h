@@ -9,7 +9,7 @@
 #include "../User/User.h"
 
 class UserFactory: Factory{
-    static unsigned id;
+
 public:
 
     UserFactory() = default;
@@ -19,6 +19,8 @@ public:
         _string password = createString("Input password");
         return new User(name,secondName,password);
     }
+
+    ~UserFactory() override = default;
 };
-unsigned UserFactory::id = 0;
+
 #endif //USERFACTORY_H

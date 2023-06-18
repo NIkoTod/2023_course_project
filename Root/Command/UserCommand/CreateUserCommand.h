@@ -11,6 +11,7 @@ public:
 
     bool execute() const override {
         try {
+
             UserFactory uf;
             User *user = uf.create();
             user->setId(repository->getUsers().getSize());
